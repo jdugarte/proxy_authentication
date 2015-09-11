@@ -24,13 +24,18 @@ module ProxyAuthentication
 
     def request_info request
       [
-        request.try(:remote_ip),
+        ip(request.try(:remote_ip)),
         Time.now.to_i,
       ]
     end
 
     def valid_request? data, request
-      request.remote_ip == data.first
+      ip(request.remote_ip) == ip(data.first)
+    end
+
+    def ip value
+      return 'localhost' if %w[ localhost 127.0.0.1 ::1 ].include?(value)
+      value
     end
 
     def extract_user data
