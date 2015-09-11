@@ -31,6 +31,8 @@ module ProxyAuthentication
 
     def valid_request? data, request
       ip(request.remote_ip) == ip(data.first)
+      # TODO: add validation for the time of the request
+      # e.g. only consider a request valid if it was generated in the last 15 minutes
     end
 
     def ip value
