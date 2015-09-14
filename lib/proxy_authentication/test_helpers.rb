@@ -1,3 +1,6 @@
+# Based on Kentaro Imai's code:
+# http://kentaroimai.com/articles/1-controller-test-helpers-for-warden
+
 module ProxyAuthentication
 
   module TestHelpers

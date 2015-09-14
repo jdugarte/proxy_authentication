@@ -2,10 +2,8 @@ module ProxyAuthentication
 
   module Helpers
 
-    extend ActiveSupport::Concern
-
-    included do
-      helper_method :current_user, :user_signed_in?
+    def self.included mod
+      mod.helper_method :current_user, :user_signed_in?
     end
 
     def current_user

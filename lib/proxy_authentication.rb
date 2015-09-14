@@ -1,3 +1,4 @@
+require 'warden'
 require 'proxy_authentication/helpers'
 require 'proxy_authentication/authentication_cipher'
 
@@ -52,7 +53,7 @@ module ProxyAuthentication
     end
 
     def include_helpers
-      ApplicationController.send :include, ::ProxyAuthentication::Helpers
+      ActionController::Base.send :include, ::ProxyAuthentication::Helpers
     end
 
   end

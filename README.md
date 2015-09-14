@@ -15,7 +15,7 @@ Both applications (the generator of the url, and the receiver of the request) mu
 * Add the gem to the `Gemfile`:
 
     ```ruby
-    gem 'proxy_authentication', github: 'jdugarte/proxy_authentication'
+    gem 'proxy_authentication', :github => 'jdugarte/proxy_authentication'
     ```
     and run the bundle command to install it.
 
@@ -26,9 +26,9 @@ Both applications (the generator of the url, and the receiver of the request) mu
 
       def to_authentication_hash
         {
-            id:    id,
-            name:  name,
-            email: email,
+            :id    => id,
+            :name  => name,
+            :email => email,
         }
       end
 
@@ -132,10 +132,11 @@ sign_out
 
 ## Compatibility/Requirements
 
-This gem has been tested and is known to work with Rails 4, and Warden 1.2, using Ruby 2.0.
+This gem has been tested and is known to work with Rails 2.3 and 4, and Warden 1.2, using Ruby 1.8 and 2.0.
 
 ## Credits
 
 * The main idea for this gem came from [Mina Naguib](https://github.com/minaguib).
 * It was developed as part of a project that originally used [Devise](https://github.com/plataformatec/devise), so it was supposed to mimic a minimal Devise API (current_user, user_signed_in?, test helpers, etc.)
 * The controller test helpers use some of [Kentaro Imai's code](http://kentaroimai.com/articles/1-controller-test-helpers-for-warden) for stubbing Warden.
+* The backport of Base64.urlsafe_[en|de]code64 methods to ruby 1.8 is by [Philip Hallstrom](https://gist.github.com/phallstrom/1397972)
