@@ -3,6 +3,7 @@ PATH
   specs:
     proxy_authentication (0.0.1)
       rails (~> 4)
+      warden (~> 1.2.3)
 
 GEM
   remote: https://rubygems.org/
