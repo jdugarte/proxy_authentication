@@ -42,7 +42,7 @@ module ProxyAuthentication
 
     def extract_user data
       hash = JSON.parse data
-      klass = ProxyAuthentication.user_class.constantize
+      klass = ProxyAuthentication.user_class.to_s.classify.constantize
       klass.from_authentication_hash hash
     end
 
