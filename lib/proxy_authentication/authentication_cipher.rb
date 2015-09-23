@@ -13,10 +13,7 @@ module ProxyAuthentication
 
     def decode token, request = nil
       data = Cipher.decode_data_from_url_token token
-      return nil if data.nil?
-
-      return nil if request.present? && !valid_request?(data, request)
-
+      return nil if data.nil? || !valid_request?(data, request)
       extract_user data.last
     end
 
@@ -29,10 +26,11 @@ module ProxyAuthentication
       ]
     end
 
+    # TODO: add validation for the time of the request
+    # e.g. only consider a request valid if it was generated in the last 15 minutes
     def valid_request? data, request
+      return true if request.nil?
       ip(request.remote_ip) == ip(data.first)
-      # TODO: add validation for the time of the request
-      # e.g. only consider a request valid if it was generated in the last 15 minutes
     end
 
     def ip value
