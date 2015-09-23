@@ -30,6 +30,7 @@ module ProxyAuthentication
     # e.g. only consider a request valid if it was generated in the last 15 minutes
     def valid_request? data, request
       return true if request.nil?
+      return validate_with_block(data, request) if ProxyAuthentication.validate_with_block.present?
       ip(request.remote_ip) == ip(data.first)
     end
 
@@ -42,6 +43,15 @@ module ProxyAuthentication
       hash = JSON.parse data
       klass = ProxyAuthentication.user_class.to_s.classify.constantize
       klass.from_authentication_hash hash
+    end
+
+    def validate_with_block data, request
+      arguments = {
+        ip:   data.first,
+        time: Time.at(data.second.to_i),
+        user: extract_user(data.last),
+      }
+      ProxyAuthentication.validate_with_block.call ip(request.remote_ip), arguments
     end
 
   end

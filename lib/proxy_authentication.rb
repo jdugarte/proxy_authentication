@@ -13,12 +13,19 @@ module ProxyAuthentication
   mattr_accessor :secret_key
   @@secret_key = nil
 
+  mattr_accessor :validate_with_block
+  @@validate_with_block = nil
+
   class << self
 
     def setup
       setup_warden
       include_helpers
       yield self if block_given?
+    end
+
+    def validate_with &block
+      @@validate_with_block = block
     end
 
     private

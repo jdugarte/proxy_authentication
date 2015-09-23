@@ -98,6 +98,22 @@ The following settings can be configured in the initializater file (e.g. `config
 | user_class                           | The name of the class representing the user      | 'User' |
 | redirect_to_if_authentication_failed | A URL to redirect to if the authentication fails | nil    |
 | secret_key                           | The key used to encrypt the token                | nil    |
+| validate_with                        | Block used to perform the request validation. See _Validation block_ below for details | nil |
+
+### Validation block
+
+In your initializer you can specify a block to perform the validation of the request. This block will receive two arguments: the first one is the current IP address, and the second is a hash containing the request information (ip, time, and user):
+
+```ruby
+ProxyAuthentication.setup do |config|
+    ...
+
+    config.validate_with do |ip, arguments|
+      return true if arguments[:user].name == "Superuser"
+      ip == arguments[:ip] && arguments[:time] > 15.minutes.ago
+    end
+end
+```
 
 ## Helpers
 
