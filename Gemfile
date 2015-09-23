@@ -15,3 +15,4 @@ gemspec
 
 gem 'byebug'
 gem 'warden'
+gem 'mocha', group: :test
