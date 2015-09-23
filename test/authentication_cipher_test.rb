@@ -16,7 +16,7 @@ class AuthenticationCipherTest < ActiveSupport::TestCase
   private
 
   def user
-    User.new 1, 'User', 'user@example.com'
+    @user = User.new 1, 'User', 'user@example.com'
   end
 
 end

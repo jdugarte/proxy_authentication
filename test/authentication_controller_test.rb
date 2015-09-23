@@ -53,7 +53,7 @@ class AuthenticationControllerTest < ActionController::TestCase
   private
 
   def user
-    User.new 1, 'User', 'user@example.com'
+    @user = User.new 1, 'User', 'user@example.com'
   end
 
   def assert_redirection_to_sign_in
