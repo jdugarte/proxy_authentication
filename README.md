@@ -109,8 +109,7 @@ ProxyAuthentication.setup do |config|
     ...
 
     config.validate_with do |ip, arguments|
-      return true if arguments[:user].name == "Superuser"
-      ip == arguments[:ip] && arguments[:time] > 15.minutes.ago
+      arguments[:user].name == "Superuser" || (ip == arguments[:ip] && arguments[:time] > 15.minutes.ago)
     end
 end
 ```
